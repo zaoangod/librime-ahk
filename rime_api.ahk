@@ -22,7 +22,7 @@ global A_IntPaddingSize := A_PtrSize - A_IntSize
 global Rime_BufferSize := 512
 
 class RimeError extends Error {
-    ; 
+    ;
 }
 
 /**
@@ -46,22 +46,22 @@ class RimeString extends Buffer {
  */
 class RimeStringArray extends Buffer {
     ; Copyright (c) thqby <https://www.autohotkey.com/boards/viewtopic.php?t=122600#p544500>
-    __New(val_arr := []) {
+    __New(list := []) {
         sz := 0, ptrsz := 0
-        for val in val_arr {
+        for item in list {
             ptrsz += A_PtrSize
-            if not IsSet(val)
+            if not IsSet(item)
                 continue
-            sz += StrPut(val, "UTF-8")
+            sz += StrPut(item, "UTF-8")
         }
         super.__New(sz + ptrsz, 0)
-        p := this.Ptr, pstr := p + val_arr.Length * A_PtrSize
-        for idx, val in val_arr {
-            if not IsSet(val)
+        p := this.Ptr, pstr := p + list.Length * A_PtrSize
+        for idx, item in list {
+            if not IsSet(item)
                 p := NumPut("Ptr", 0, p)
             else {
                 p := NumPut("Ptr", pstr, p)
-                pstr += StrPut(val, pstr, "UTF-8")
+                pstr += StrPut(item, pstr, "UTF-8")
             }
         }
     }
