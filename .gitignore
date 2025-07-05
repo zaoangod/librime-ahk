@@ -6,3 +6,4 @@ tests/junit.xml
 *.dll
 *.exe
 test.ahk
+.idea
